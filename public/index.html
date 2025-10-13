@@ -1,0 +1,108 @@
+<html>
+    <head>
+        <meta name='viewport'
+            content='width=device-width, initial-scale=1'
+        />
+        <title>Answer</title>
+        <link rel='stylesheet'
+            href='https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp'
+        />
+        <link rel='stylesheet'
+            href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css'
+            integrity='sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY='
+            crossorigin=''
+        />
+        <link rel='stylesheet' href='/index.css' />
+        <script
+            src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'
+            integrity='sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo='
+            crossorigin=''
+        ></script>
+        <script type='module' src='/index.js'></script>
+    </head>
+    <body>
+        <div id='not-modal'>
+            <div class='menu'>
+                <div class='title'>A.N.S.W.E.R.</div>
+                <div class='subtitle'>
+                    A Network of<br />
+                    Survival, Welfare, and<br />
+                    Essential Resources
+                </div>
+                <div class='cta'>
+                    <button class='amber'>
+                        <span class='material-symbols-sharp'>search</span>
+                        Find food
+                    </button>
+                    <button class='blue'>Give food</button>
+                    <button class='green' id='register-button'>Become an agent</button>
+                    <button class='purple' id='login-button'>Login</button>
+                </div>
+            </div>
+            <div class='map-container'>
+                <div id='map'></div>
+            </div>
+        </div>
+        <div id='modal-container'>
+            <div id='login-modal' class='modal'>
+                <div class='header'>
+                    <div class='title'>Login</div>
+                    <button id='login-modal-close'>Close</button>
+                </div>
+                <hr /><br />
+                <form action='/api/sessions' method='POST'>
+                    <label>
+                        Email:
+                        <input type='email' name='email' autocomplete='email' />
+                    </label>
+                    <div class='andor'>Or</div>
+                    <label>
+                        Phone:
+                        <input type='tel' name='phone' autocomplete='tel' />
+                    </label>
+                    <br /><hr /><br />
+                    <label>
+                        Password:
+                        <input type='password' name='input' autocomplete='current-password' />
+                    </label>
+                    <br /><hr /><br />
+                    <input type='submit' value='Enter' />
+                </form>
+            </div>
+            <div id='register-modal' class='modal'>
+                <div class='header'>
+                    <div class='title'>Become an Agent</div>
+                    <button id='register-modal-close'>Close</button>
+                </div>
+                <hr /><br />
+                <form action='/api/agents' method='POST'>
+                    <label>
+                        Email: <input type='email' name='email'
+                            autocomplete='email'
+                        />
+                    </label>
+                    <div class='andor'>And/or</div>
+                    <label>
+                        Phone: <input type='tel' name='phone'
+                            autocomplete='tel'
+                        />
+                    </label>
+                    <br /><hr /><br />
+                    <label>
+                        Password: <input type='password' name='input'
+                            autocomplete='new-password'
+                        />
+                    </label>
+                    <br />
+                    <label>
+                        Confirm Password: <input type='password' name='input2'
+                            autocomplete='new-password'
+                        />
+                    </label>
+                    <br /><hr /><br />
+                    <input type='submit' value='Join' />
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

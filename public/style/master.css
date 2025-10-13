@@ -1,0 +1,23 @@
+html {
+    font-size: 16pt;
+    font-family: monospace;
+}
+
+body {
+    margin: 0;
+}
+
+button {
+    appearance: none;
+    border: none;
+    background: none;
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    text-align: start;
+    padding: 0;
+}
+
+button:not(:disabled) {
+    cursor: pointer;
+}
