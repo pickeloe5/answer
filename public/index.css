@@ -94,7 +94,46 @@
 
 #login-modal {
     background-color: #9c27b0;
-    
+}
+
+#search-modal {
+    background-color: #ff5722;
+}
+
+#give-modal {
+    background-color: #2196f3;
+}
+
+#register-modal label {
+    background-color: #1b5e20;
+}
+
+#login-modal label {
+    background-color: #4a148c;
+}
+
+#search-modal label {
+    background: #bf360c;
+}
+
+#give-modal label {
+    background: #0d47a1;
+}
+
+#login-modal input[type='submit'], #login-modal button {
+    background-color: #4a148c;
+}
+
+#register-modal input[type='submit'], #register-modal button {
+    background-color: #1b5e20;
+}
+
+#search-modal input[type='submit'], #search-modal button {
+    background-color: #bf360c;
+}
+
+#give-modal input[type='submit'], #search-modal button {
+    background-color: #0d47a1;
 }
 
 .modal .title {
@@ -102,7 +141,7 @@
     font-weight: bold;
 }
 
-#register-modal:not(.active), #login-modal:not(.active) {
+.modal:not(.active) {
     display: none;
 }
 
@@ -118,14 +157,6 @@
     align-items: center;
     border-radius: .25rem;
     box-shadow: 0 0 .25rem 0 #0008;
-}
-
-#login-modal label {
-    background-color: #4a148c;
-}
-
-#register-modal label {
-    background-color: #1b5e20;
 }
 
 .modal input {
@@ -146,14 +177,6 @@
     padding: .5rem;
     border-radius: .25rem;
     box-shadow: 0 0 .25rem 0 #0008;
-}
-
-#login-modal input[type='submit'], #login-modal button {
-    background-color: #4a148c;
-}
-
-#register-modal input[type='submit'], #register-modal button {
-    background-color: #1b5e20;
 }
 
 input[type='submit']:not(:disabled) {

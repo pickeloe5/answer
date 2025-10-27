@@ -3,20 +3,20 @@
         <meta name='viewport'
             content='width=device-width, initial-scale=1'
         />
-        <title>Answer</title>
+        <title>A.N.S.W.E.R.</title>
         <link rel='stylesheet'
             href='https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp'
         />
         <link rel='stylesheet'
             href='https://unpkg.com/leaflet@1.9.4/dist/leaflet.css'
             integrity='sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY='
-            crossorigin=''
+            crossorigin='http://localhost:3000'
         />
         <link rel='stylesheet' href='/index.css' />
         <script
             src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js'
             integrity='sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo='
-            crossorigin=''
+            crossorigin='http://localhost:3000'
         ></script>
         <script type='module' src='/index.js'></script>
     </head>
@@ -30,11 +30,11 @@
                     Essential Resources
                 </div>
                 <div class='cta'>
-                    <button class='amber'>
+                    <button class='amber' id='search-button'>
                         <span class='material-symbols-sharp'>search</span>
                         Find food
                     </button>
-                    <button class='blue'>Give food</button>
+                    <button class='blue' id='give-button'>Give food</button>
                     <button class='green' id='register-button'>Become an agent</button>
                     <button class='purple' id='login-button'>Login</button>
                 </div>
@@ -44,6 +44,28 @@
             </div>
         </div>
         <div id='modal-container'>
+            <div id='give-modal' class='modal'>
+                <div class='header'>
+                    <div class='title'>Give Food</div>
+                    <button id='give-modal-close'>Close</button>
+                </div>
+                <hr /><br />
+                <label>
+                    Location:
+                    <input type='search' id='give-modal-input' />
+                </label>
+            </div>
+            <div id='search-modal' class='modal'>
+                <div class='header'>
+                    <div class='title'>Find Food</div>
+                    <button id='search-modal-close'>Close</button>
+                </div>
+                <hr /><br />
+                <label>
+                    Location:
+                    <input type='search' id='search-input' />
+                </label>
+            </div>
             <div id='login-modal' class='modal'>
                 <div class='header'>
                     <div class='title'>Login</div>
@@ -75,6 +97,8 @@
                     <button id='register-modal-close'>Close</button>
                 </div>
                 <hr /><br />
+                <div class='g_id_signin'></div>
+                <br />
                 <form action='/api/agents' method='POST'>
                     <label>
                         Email: <input type='email' name='email'
@@ -104,5 +128,10 @@
                 </form>
             </div>
         </div>
+        <div id='g_id_onload'
+            data-auto_prompt='false'
+            data-callback='handleCredentialResponse'
+            data-client_id='126168465185-0d0uhll9mjtu0cmqt9c5vnlm020bp5j6.apps.googleusercontent.com'
+        ></div>
     </body>
 </html>
