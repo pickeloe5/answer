@@ -1,0 +1,94 @@
+<html>
+    <head>
+        <meta name='viewport' content='width=device-width, initial-scale=1' />
+        <title>Reset Password | A.N.S.W.E.R.</title>
+        <link rel='stylesheet' href='/style/master.css' />
+        <style>
+            body {
+                background-color: #607d8b;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding-top: 10vh;
+            }
+            main {
+                background-color: #FFFD;
+                text-align: center;
+                padding: 1rem;
+                border-radius: .5rem;
+                box-shadow: 0 0 .5rem 0 #0004;
+            }
+            label {
+                display: block;
+            }
+            #submit, label, button {
+                border-radius: .5rem;
+                box-shadow: 0 0 .5rem 0 #0004;
+                padding: .5rem;
+            }
+            #submit, label {
+                background-color: #263238;
+                color: #FFFD;
+            }
+            #cancel {
+                background-color: #9e9e9e;
+                color: #000D;
+            }
+        </style>
+    </head>
+    <body>
+        <main>
+            <a href='/'>
+                <img src='/img/logo-1.png' alt='A.N.S.W.E.R. in a cool style called Skate' />
+            </a>
+            <h1>Reset Password</h1>
+            <form action='/api/agents/reset-password' method='POST'>
+                <label>
+                    New password:
+                    <br />
+                    <input type='password' autocomplete='new-password' name='input' id='input' />
+                </label>
+                <br />
+                <label>
+                    Confirm new password:
+                    <br />
+                    <input type='password' autocomplete='new-password' id='input2' />
+                </label>
+                <br />
+                <input type='hidden' name='key' id='key' />
+                <input type='submit' value='Submit' id='submit' />
+            </form>
+            <button id='cancel'>Cancel</button>
+        </main>
+        <script>
+            const query = new URLSearchParams(location.search)
+            document.getElementById('key').value = query.get('key')
+            document.getElementById('submit')
+                .addEventListener('click', event => {
+                    if (
+                        document.getElementById('input').value !==
+                        document.getElementById('input2').value
+                    ) {
+                        document.getElementById('input2').classList.toggle('bad', true)
+                        event.preventDefault()
+                        event.stopImmediatePropagation()
+                        event.stopPropagation()
+                        return false
+                    }
+                    return true
+                })
+            document.getElementById('cancel')
+                .addEventListener('click', () => {
+                    fetch(`/api/reset-password?key=${encodeURIComponent(query.get('key'))}`, {
+                        method: 'DELETE'
+                    }).then(response => {
+                        if (response.status !== 200) {
+                            console.log('Non-200 response status from cancel', response.status)
+                            return
+                        }
+                        location.href = '/'
+                    })
+                })
+        </script>
+    </body>
+</html>

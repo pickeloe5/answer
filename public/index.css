@@ -104,6 +104,10 @@
     background-color: #2196f3;
 }
 
+#repass-modal {
+    background-color: #607d8b;
+}
+
 #register-modal label {
     background-color: #1b5e20;
 }
@@ -118,6 +122,10 @@
 
 #give-modal label {
     background: #0d47a1;
+}
+
+#repass-modal label {
+    background: #263238;
 }
 
 #login-modal input[type='submit'], #login-modal button {
@@ -136,6 +144,10 @@
     background-color: #0d47a1;
 }
 
+#repass-modal input[type='submit'], #repass-modal button {
+    background-color: #263238;
+}
+
 .modal .title {
     font-size: 1.5rem;
     font-weight: bold;
@@ -149,6 +161,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 1rem;
 }
 
 .modal label {
@@ -187,4 +200,13 @@ input[type='submit']:not(:disabled) {
     0% {transform: scale(75%);}
     50% {transform: scale(112.5%);}
     100% {transform: scale(100%);}
+}
+
+#register-input2.bad {
+    background-color: #f4433688;
+}
+
+.modal button#forgot-password {
+    background-color: #FFFD;
+    color: #000D;
 }
