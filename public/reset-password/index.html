@@ -43,6 +43,8 @@
             </a>
             <h1>Reset Password</h1>
             <form action='/api/agents/reset-password' method='POST'>
+                <input type='hidden' name='key' id='key' />
+                <input type='email' autocomplete='email' id='email' style='display: none;' />
                 <label>
                     New password:
                     <br />
@@ -55,14 +57,25 @@
                     <input type='password' autocomplete='new-password' id='input2' />
                 </label>
                 <br />
-                <input type='hidden' name='key' id='key' />
                 <input type='submit' value='Submit' id='submit' />
             </form>
             <button id='cancel'>Cancel</button>
         </main>
         <script>
             const query = new URLSearchParams(location.search)
+            fetch(`/api/reset-password/email?key=${encodeURIComponent(query.get('key'))}`, {
+                headers: {'Accept': 'application/json'}
+            }).then(response => {
+                if (response.status === 200) {
+                    response.json().then(responseBody => {
+                        const email = responseBody?.email
+                        if (typeof email === 'string')
+                            document.getElementById('email').value = email
+                    })
+                }
+            })
             document.getElementById('key').value = query.get('key')
+            // document.getElementById('email').value = query.get('key')
             document.getElementById('submit')
                 .addEventListener('click', event => {
                     if (

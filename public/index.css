@@ -207,6 +207,6 @@ input[type='submit']:not(:disabled) {
 }
 
 .modal button#forgot-password {
-    background-color: #FFFD;
+    background-color: #ce93d8;
     color: #000D;
 }
