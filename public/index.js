@@ -28,7 +28,17 @@ addEventListener('load', () => {
         toggleModal($loginModal, false)
     })
     document.getElementById('login-button').addEventListener('click', () => {
-        toggleModal($loginModal, true)
+        fetch(
+            '/api/sessions/is-logged-in',
+            {headers: {'Accept': 'application/json'}}
+        ).then(async response => {
+            if (response.status === 200) {
+                const responseBody = await response.json()
+                if (responseBody?.isLoggedIn)
+                    location.href = '/agent-dashboard'
+                else toggleModal($loginModal, true)
+            }
+        }).catch(() => {toggleModal($loginModal, true)})
     })
     document.getElementById('search-modal-close').addEventListener('click', () => {
         toggleModal($searchModal, false)

@@ -24,6 +24,8 @@
     overflow-y: auto;
     flex-grow: 0;
     flex-shrink: 0;
+    background-color: #f8bbd0;
+    color: #000D;
 }
 
 .menu .title {

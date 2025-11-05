@@ -9,6 +9,18 @@ addEventListener('load', () => {
     $.id('regnode-modal-close').on('click', () => {
         $.id('register-node-modal').noClass('active')
     })
+    $.id('logout').on('click', () => {
+        fetch(
+            '/api/sessions/me',
+            {method: 'DELETE'}
+        ).then(async response => {
+            if (response.status !== 200) {
+                console.log('Non-zero response status from logout')
+                return
+            }
+            location.href = '/'
+        })
+    })
 })
 
 async function loadPlaces() {
