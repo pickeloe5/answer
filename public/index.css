@@ -140,7 +140,7 @@
     background-color: #bf360c;
 }
 
-#give-modal input[type='submit'], #search-modal button {
+#give-modal input[type='submit'], #give-modal button {
     background-color: #0d47a1;
 }
 
@@ -194,12 +194,6 @@
 
 input[type='submit']:not(:disabled) {
     cursor: pointer;
-}
-
-@keyframes modalpop {
-    0% {transform: scale(75%);}
-    50% {transform: scale(112.5%);}
-    100% {transform: scale(100%);}
 }
 
 #register-input2.bad {
