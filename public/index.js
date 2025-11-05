@@ -1,4 +1,5 @@
 // import {organizations} from '/script/dummy.js'
+import $ from '/script/$.js'
 
 let $notModal
 let $modalContainer
@@ -8,73 +9,90 @@ let $searchModal
 let $giveModal
 let $registerInput2
 let $repassModal
+const $registerButton = $.create('button').class('green').text('Become an agent')
+const $loginButton = $.create('button').class('purple').text('Login')
+const $nodeButton = $.create('button').class('green').text('Register a node')
+const $logoutButton = $.create('button').class('purple').text('Logout')
 
-addEventListener('load', () => {
-    $notModal = document.getElementById('not-modal')
-    $modalContainer = document.getElementById('modal-container')
-    $registerModal = document.getElementById('register-modal')
-    $loginModal = document.getElementById('login-modal')
-    $searchModal = document.getElementById('search-modal')
-    $giveModal = document.getElementById('give-modal')
-    $registerInput2 = document.getElementById('register-input2')
-    $repassModal = document.getElementById('repass-modal')
-    document.getElementById('register-modal-close').addEventListener('click', () => {
+/*
+<button class='green' id='register-button'>Become an agent</button>
+<button class='purple' id='login-button'>Login</button>
+*/
+
+$.onLoad(() => {
+    $notModal = $.id('not-modal')
+    $modalContainer = $.id('modal-container')
+    $registerModal = $.id('register-modal')
+    $loginModal = $.id('login-modal')
+    $searchModal = $.id('search-modal')
+    $giveModal = $.id('give-modal')
+    $registerInput2 = $.id('register-input2')
+    $repassModal = $.id('repass-modal')
+    fetch(
+        '/api/sessions/is-logged-in',
+        {headers: {'Accept': 'application/json'}}
+    ).then(async response => {
+        if (response.status === 400) {
+            $.id('menu-cta').add($registerButton, $loginButton)
+        } else if (response.status === 200) {
+            const responseBody = await response.json()
+            const isLoggedIn = responseBody?.isLoggedIn
+            if (typeof isLoggedIn === 'boolean') {
+                if (!isLoggedIn) {
+                    $.id('menu-cta').add($registerButton, $loginButton)
+                } else {
+                    $.id('menu-cta').add($nodeButton, $logoutButton)
+                }
+            }
+        }
+    })
+    $.id('register-modal-close').on('click', () => {
         toggleModal($registerModal, false)
     })
-    document.getElementById('register-button').addEventListener('click', () => {
+    $registerButton.on('click', () => {
         toggleModal($registerModal, true)
     })
-    document.getElementById('login-modal-close').addEventListener('click', () => {
+    $.id('login-modal-close').on('click', () => {
         toggleModal($loginModal, false)
     })
-    document.getElementById('login-button').addEventListener('click', () => {
-        fetch(
-            '/api/sessions/is-logged-in',
-            {headers: {'Accept': 'application/json'}}
-        ).then(async response => {
-            if (response.status === 200) {
-                const responseBody = await response.json()
-                if (responseBody?.isLoggedIn)
-                    location.href = '/agent-dashboard'
-                else toggleModal($loginModal, true)
-            }
-        }).catch(() => {toggleModal($loginModal, true)})
+    $loginButton.on('click', () => {
+        toggleModal($loginModal, true)
     })
-    document.getElementById('search-modal-close').addEventListener('click', () => {
+    $.id('search-modal-close').on('click', () => {
         toggleModal($searchModal, false)
     })
-    document.getElementById('search-button').addEventListener('click', () => {
+    $.id('search-button').on('click', () => {
         toggleModal($searchModal, true)
     })
-    document.getElementById('give-modal-close').addEventListener('click', () => {
+    $.id('give-modal-close').on('click', () => {
         toggleModal($giveModal, false)
     })
-    document.getElementById('give-button').addEventListener('click', () => {
+    $.id('give-button').on('click', () => {
         toggleModal($giveModal, true)
     })
-    document.getElementById('repass-modal-close').addEventListener('click', () => {
+    $.id('repass-modal-close').on('click', () => {
         toggleModal($repassModal, false)
     })
-    document.getElementById('forgot-password').addEventListener('click', () => {
+    $.id('forgot-password').on('click', () => {
         toggleModal($loginModal, false)
         toggleModal($repassModal, true)
     })
-    document.getElementById('register-submit').addEventListener('click', event => {
+    $.id('register-submit').on('click', event => {
         event.preventDefault()
         event.stopImmediatePropagation()
         event.stopPropagation()
         if (
-            document.getElementById('register-input').value !==
+            $.id('register-input').value !==
             $registerInput2.value
         ) {
-            $registerInput2.classList.toggle('bad', true)
+            $registerInput2.class('bad')
             return false
         }
         fetch('/api/registrations', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
-                email: document.getElementById('register-email').value,
+                email: $.id('register-email').value,
                 input: $registerInput2.value
             })
         }).then(response => {
@@ -85,11 +103,11 @@ addEventListener('load', () => {
             alert('Woohoo!')
         })
     })
-    $registerInput2.addEventListener('focus', () => {
-        $registerInput2.classList.toggle('bad', false)
+    $registerInput2.on('focus', () => {
+        $registerInput2.noClass('bad')
     })
-    document.getElementById('repass-modal-submit').addEventListener('click', () => {
-        const email = document.getElementById('repass-modal-input').value
+    $.id('repass-modal-submit').on('click', () => {
+        const email = $.id('repass-modal-input').value
         if (typeof email !== 'string' || email.length <= 0 || email.length > 1024)
             return;
         fetch('/api/reset-password', {
@@ -104,13 +122,19 @@ addEventListener('load', () => {
             alert('Feedback!')
         })
     })
+    $logoutButton.on('click', () => {
+        fetch('/api/sessions/me', {method: 'DELETE'}).then(async response => {
+            if (response.status === 200)
+                location.reload()
+        })
+    })
     loadMap()
 })
 
 function toggleModal($modal, open) {
-    $notModal.classList.toggle('modal-active', open)
-    $modal.classList.toggle('active', open)
-    $modalContainer.classList.toggle('active', open)
+    $notModal.toggleClass('modal-active', open)
+    $modal.toggleClass('active', open)
+    $modalContainer.toggleClass('active', open)
 }
 
 function loadMap() {

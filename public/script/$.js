@@ -87,6 +87,10 @@ export default class DomUtil {
             this.node.classList.toggle(className, false)
         return this
     }
+    toggleClass(className, active) {
+        this.node.classList.toggle(className, active)
+        return this
+    }
     withAttribute(name, value) {
         this.node.setAttribute(name, value)
         return this
