@@ -67,7 +67,7 @@
     background-color: #9c27b0;
 }
 
-#modal-container {
+#modal {
     position: fixed;
     top: 0; left: 0;
     bottom: 0; right: 0;
@@ -76,7 +76,7 @@
     justify-content: center;
 }
 
-#modal-container:not(.active) {
+#modal:not(.active) {
     display: none;
 }
 
@@ -90,63 +90,63 @@
     animation: modalpop .4s ease;
 }
 
-#register-modal {
+.modal.green {
     background-color: #4caf50;
 }
 
-#login-modal {
+.modal.purple {
     background-color: #9c27b0;
 }
 
-#search-modal {
+.modal.amber {
     background-color: #ff5722;
 }
 
-#give-modal {
+.modal.blue {
     background-color: #2196f3;
 }
 
-#repass-modal {
+.modal.blue-gray {
     background-color: #607d8b;
 }
 
-#register-modal label {
+.modal.green label {
     background-color: #1b5e20;
 }
 
-#login-modal label {
+.modal.purple label {
     background-color: #4a148c;
 }
 
-#search-modal label {
+.modal.amber label {
     background: #bf360c;
 }
 
-#give-modal label {
+.modal.blue label {
     background: #0d47a1;
 }
 
-#repass-modal label {
+.modal.blue-gray label {
     background: #263238;
 }
 
-#login-modal input[type='submit'], #login-modal button {
+.modal.purple input[type='submit'], .modal.purple button {
     background-color: #4a148c;
 }
 
-#register-modal input[type='submit'], #register-modal button {
+.modal.green input[type='submit'], .modal.green button {
     background-color: #1b5e20;
 }
 
-#search-modal input[type='submit'], #search-modal button {
+.modal.amber input[type='submit'], .modal.amber button {
     background-color: #bf360c;
 }
 
-#give-modal input[type='submit'], #give-modal button {
+.modal.blue input[type='submit'], .modal.blue button {
     background-color: #0d47a1;
 }
 
-#repass-modal input[type='submit'], #repass-modal button {
+.modal.blue-gray input[type='submit'], .modal.blue-gray button {
     background-color: #263238;
 }
 
@@ -155,15 +155,12 @@
     font-weight: bold;
 }
 
-.modal:not(.active) {
-    display: none;
-}
-
 .modal .header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
+    margin-bottom: 1rem;
 }
 
 .modal label {

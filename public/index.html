@@ -50,112 +50,13 @@
                     Survival, Welfare, and<br />
                     Essential Resources
                 </div>
-                <div class='cta' id='menu-cta'>
-                    <button class='amber' id='search-button'>
-                        <span class='material-symbols-sharp'>search</span>
-                        Find food
-                    </button>
-                    <button class='blue' id='give-button'>Give food</button>
-                </div>
+                <div class='cta' id='menu-cta'></div>
             </div>
             <div class='map-container'>
                 <div id='map'></div>
             </div>
         </div>
-        <div id='modal-container'>
-            <div id='give-modal' class='modal'>
-                <div class='header'>
-                    <div class='title'>Give Food</div>
-                    <button id='give-modal-close'>Close</button>
-                </div>
-                <hr /><br />
-                <label>
-                    Location:
-                    <input type='search' id='give-modal-input' />
-                </label>
-            </div>
-            <div id='search-modal' class='modal'>
-                <div class='header'>
-                    <div class='title'>Find Food</div>
-                    <button id='search-modal-close'>Close</button>
-                </div>
-                <hr /><br />
-                <label>
-                    Location:
-                    <input type='search' id='search-input' />
-                </label>
-            </div>
-            <div id='login-modal' class='modal'>
-                <div class='header'>
-                    <div class='title'>Login</div>
-                    <button id='login-modal-close'>Close</button>
-                </div>
-                <hr /><br />
-                <div class='g_id_signin'></div>
-                <br />
-                <form action='/api/sessions' method='POST'>
-                    <label>
-                        Email:
-                        <input type='email' name='email' autocomplete='email' />
-                    </label>
-                    <br />
-                    <label>
-                        Password:
-                        <input type='password' name='input' autocomplete='current-password' />
-                    </label>
-                    <br />
-                    <input type='submit' value='Submit' />
-                </form>
-                <br />
-                <button id='forgot-password'>Forgot password</button>
-            </div>
-            <div id='register-modal' class='modal'>
-                <div class='header'>
-                    <div class='title'>Become an Agent</div>
-                    <button id='register-modal-close'>Close</button>
-                </div>
-                <hr /><br />
-                <div class='g_id_signin'></div>
-                <br />
-                <form action='/api/registrations' method='POST'>
-                    <label>
-                        Email: <input type='email' name='email'
-                            autocomplete='email'
-                            id='register-email'
-                        />
-                    </label>
-                    <br />
-                    <label>
-                        Password: <input type='password' name='input'
-                            autocomplete='new-password'
-                            id='register-input'
-                        />
-                    </label>
-                    <br />
-                    <label>
-                        Confirm Password: <input type='password' name='input2'
-                            autocomplete='new-password'
-                            id='register-input2'
-                        />
-                    </label>
-                    <br />
-                    <input type='submit' value='Join' id='register-submit' />
-                </form>
-            </div>
-            <div id='repass-modal' class='modal'>
-                <div class='header'>
-                    <div class='title'>Forgot Password</div>
-                    <button id='repass-modal-close'>Close</button>
-                </div>
-                <hr /><br />
-                <label>
-                    Email:
-                    <input type='email' autocomplete='email' id='repass-modal-input' />
-                </label>
-                <br /><br />
-                <button id='repass-modal-submit'>Submit</button>
-            </div>
-        </div>
+        <div id='modal'></div>
         <div id='g_id_onload'
             data-auto_prompt='false'
             data-login_uri='http://localhost:3000/api/sessions/google'

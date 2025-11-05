@@ -16,6 +16,9 @@ export default class DomUtil {
     static br() {
         return DomUtil.create('br')
     }
+    static hr() {
+        return DomUtil.create('hr')
+    }
     static div(...classes) {
         return DomUtil.create('div').class(...classes)
     }
@@ -91,8 +94,13 @@ export default class DomUtil {
         this.node.classList.toggle(className, active)
         return this
     }
-    withAttribute(name, value) {
-        this.node.setAttribute(name, value)
+    withAttribute(nameOrObject, value) {
+        if (typeof nameOrObject === 'object') {
+            for (const key in nameOrObject)
+                this.withAttribute(key, nameOrObject[key])
+            return this
+        }
+        this.node.setAttribute(nameOrObject, value)
         return this
     }
     attribute(name, value) {return this.withAttribute(name, value)}
