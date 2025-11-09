@@ -13,6 +13,9 @@ class HoursInput {
     }
     #slots = []
     #isOpen = false
+    get value() {
+        return [...this.#slots]
+    }
     constructor($this) {
         this.$ = $this
     }
@@ -146,6 +149,9 @@ customElements.define('hours-input', class extends HTMLElement {
     constructor() {
         super()
         this.#delegate = new HoursInput(new $(this))
+    }
+    get value() {
+        return this.#delegate.value
     }
     connectedCallback() {
         if (!this.#hasRendered) {

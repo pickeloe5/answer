@@ -1,4 +1,4 @@
-@import url('/agent-dashboard/hours-input.css');
+@import url('/style/hours-input.css');
 
 .register-node-location gmp-place-autocomplete {
     height: 42pt;

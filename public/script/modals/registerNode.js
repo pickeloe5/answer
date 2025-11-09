@@ -1,8 +1,33 @@
 import $ from '/script/$.js'
 import BaseModal from '/script/modals/base.js'
-import '/agent-dashboard/hours-input.js'
+import '/script/hours-input.js'
 
 export default class RegisterNodeModal extends BaseModal {
+    $children = {
+        name: null,
+        location: null,
+        role: null,
+        goods: {
+            shelfStable: null,
+            canned: null
+        },
+        hours: null
+    }
+    #locationGoogle = null
+    #locationValue = null
+    #submit() {
+        const data = {
+            name: this.$children.name.value,
+            location: this.#locationValue,
+            role: this.$children.role.value,
+            goods: {
+                shelfStable: this.$children.goods.shelfStable.checked,
+                canned: this.$children.goods.canned.checked
+            },
+            hours: this.$children.hours.value
+        }
+        console.log(data)
+    }
     getColor() {
         return 'green'
     }
@@ -12,33 +37,47 @@ export default class RegisterNodeModal extends BaseModal {
     renderContent() {
         let $name, $location, $role
         $name = $.create('label').class('label').add('Name:',
-            $.create('input').attr('type', 'text')
+            this.$children.name = $.create('input').attr('type', 'text')
         )
-        const placeAutocomplete = new google.maps.places.PlaceAutocompleteElement({})
+        const $locationInput = $.create('input').attr('type', 'search')
+        this.#locationGoogle = new google.maps.places.Autocomplete(
+            $locationInput.node,
+            {}
+        )
+        this.#locationGoogle.addListener('place_changed', () => {
+            this.#locationValue = {
+                input: this.$children.location.value,
+                googleData: this.#locationGoogle.getPlace()
+            }
+        })
+        const checkLocation = () => {
+            if (
+                this.#locationValue &&
+                this.$children.location.value !== this.#locationValue.input
+            ) {
+                this.#locationValue = null
+            }
+        }
+        $locationInput.on('change', checkLocation)
+        $locationInput.on('input', checkLocation)
         $location = $.create('label').class('register-node-location label').add('Location:',
-            placeAutocomplete
+            this.$children.location = $locationInput
         )
         $role = $.create('label').class('label').add('Role:',
-            $.create('select').add(
+            this.$children.role = $.create('select').add(
                 $.create('option')
                     .attr('value', 'distribution')
                     .text('Distribution')
             )
         )
         return [
-            $name,
-            $.br(),
-            $.br(),
-            $location,
-            $.br(),
-            $.br(),
-            $role,
-            $.br(),
-            $.br(),
-            this.#renderDistroContent(),
-            $.br(),
-            $.br(),
-            $.create('button').text('Submit')
+            $name, $.br(), $.br(),
+            $location, $.br(), $.br(),
+            $role, $.br(), $.br(),
+            this.#renderDistroContent(), $.br(), $.br(),
+            $.create('button').text('Submit').on('click', () => {
+                this.#submit()
+            })
         ]
     }
     #renderDistroContent() {
@@ -50,7 +89,7 @@ export default class RegisterNodeModal extends BaseModal {
                 'Hours:',
                 $.br(),
                 $.br(),
-                $.create('hours-input')
+                this.$children.hours = $.create('hours-input')
             )
         ]
     }
@@ -60,15 +99,22 @@ export default class RegisterNodeModal extends BaseModal {
             'Accepted Goods:',
             $.br(),
             $.br(),
-            goods.map(good => [
-                $.create('label')
-                    .class('blanco register-node-good')
-                    .add(
+            $.create('label')
+                .class('blanco register-node-good')
+                .add(
+                    this.$children.goods.shelfStable =
                         $.create('input').attr('type', 'checkbox'),
-                        good
-                    ),
-                $.br()
-            ])
+                    'Self-stable'
+                ),
+            $.br(),
+            $.create('label')
+                .class('blanco register-node-good')
+                .add(
+                    this.$children.goods.canned =
+                        $.create('input').attr('type', 'checkbox'),
+                    'Canned'
+                ),
+            $.br()
         )
     }
 }

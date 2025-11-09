@@ -49,6 +49,7 @@ export default class DomUtil {
     constructor(node) {
         this.node = node
     }
+    get checked() {return this.node.checked}
     get value() {return this.node.value}
     on(eventName, onFired, options) {
         this.node.addEventListener(eventName, onFired, options)
