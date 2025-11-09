@@ -1,0 +1,21 @@
+@import url('/agent-dashboard/hours-input.css');
+
+.register-node-location gmp-place-autocomplete {
+    height: 42pt;
+    color-scheme: dark;
+    background: none;
+    border: none;
+}
+
+.register-node-good {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    min-width: 42pt;
+    min-height: 42pt;
+}
+
+.register-node-good input[type='checkbox'] {
+    width: 21pt;
+    height: 21pt;
+}

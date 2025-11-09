@@ -3,14 +3,7 @@
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <title>A.N.S.W.E.R.</title>
         <link rel='stylesheet' href='/agent-dashboard/style.css' />
-        <script>
-            (g=>{var h,a,k,p="The Google Maps JavaScript API",c="google",l="importLibrary",q="__ib__",m=document,b=window;b=b[c]||(b[c]={});var d=b.maps||(b.maps={}),r=new Set,e=new URLSearchParams,u=()=>h||(h=new Promise(async(f,n)=>{await (a=m.createElement("script"));e.set("libraries",[...r]+"");for(k in g)e.set(k.replace(/[A-Z]/g,t=>"_"+t[0].toLowerCase()),g[k]);e.set("callback",c+".maps."+q);a.src=`https://maps.${c}apis.com/maps/api/js?`+e;d[q]=f;a.onerror=()=>h=n(Error(p+" could not load."));a.nonce=m.querySelector("script[nonce]")?.nonce||"";m.head.append(a)}));d[l]?console.warn(p+" only loads once. Ignoring:",g):d[l]=(f,...n)=>r.add(f)&&u().then(()=>d[l](f,...n))})({
-              key: "AIzaSyAZQQU9H8dtrIb_0hPSSLfyOQtmx8ZMBjo",
-              v: "weekly",
-              // Use the 'v' parameter to indicate the version to use (weekly, beta, alpha, etc.).
-              // Add other bootstrap parameters as needed, using camel case.
-            });
-          </script>
+        <script src='/script/google-maps.js'></script>
         <script type='module' src='/agent-dashboard/script.js'></script>
     </head>
     <body>
@@ -33,39 +26,6 @@
         <footer>
             <button id='logout' class='center-flex'>Logout</button>
         </footer>
-        <div id='register-node-modal'>
-            <div class='header'>
-                <div class='title'>Register Node</div>
-                <button id='regnode-modal-close' class='center-flex'>X</button>
-            </div>
-            <br />
-            Name:
-            <br />
-            <input type='text' id='regnode-name-input' />
-            <br /><br />
-            Location:
-            <br />
-            <div id='regnode-place-input'></div>
-            <br />
-            Role:
-            <br />
-            <select id='regnode-kind-input'>
-                <option value='distribution'>Distribute food</option>
-                <!-- <option value='production'>Production</option>
-                <option value='logistics'>Logistics</option> -->
-            </select>
-            <br /><br />
-            Accepted goods:
-            <br />
-            <label><input type='checkbox' /> Shelf stable</label>
-            <br />
-            <label><input type='checkbox' /> Canned</label>
-            <br /><br />
-            Hours:
-            <br />
-            <hours-input></hours-input>
-            <br />
-            <button>Submit</button>
-        </div>
+        <div id='modal'></div>
     </body>
 </html>

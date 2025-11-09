@@ -1,8 +1,5 @@
 hours-input {
     display: block;
-    background-color: #FFF;
-    border: 1pt solid #000;
-    padding: .5rem;
 }
 
 .hours-input-out {
@@ -40,9 +37,4 @@ hours-input select, hours-input input[type='time'] {
 
 .hours-input-title {
     font-weight: bold;
-}
-
-.hours-input-unslot {
-    color: #bf360c;
-    text-decoration: underline;
 }

@@ -1,9 +1,10 @@
 import $ from '/script/$.js'
-import Modal from '/script/modals/index.js'
+import * as Modal from '/script/modals/index.js'
 
 let $modal, $notModal
 
 $.onLoad(async () => {
+    await google.maps.importLibrary('places')
     $modal = $.id('modal')
     $notModal = $.id('not-modal')
     loadMap()
@@ -17,28 +18,30 @@ async function loadMenuCta() {
             $.span('material-symbols-sharp').text('search'),
             'Find food'
         ).on('click', () => {
-            popModal(Modal.FindFood)
+            popModal(new Modal.FindFood())
         }),
         $.create('button').class('blue').text('Give food')
-            .on('click', () => {popModal(Modal.GiveFood)}),
+            .on('click', () => {popModal(new Modal.GiveFood())}),
         !isLoggedIn ? [
             $.create('button').class('green').text('Become an agent')
-                .on('click', () => {popModal(Modal.Register)}),
+                .on('click', () => {popModal(new Modal.Register())}),
             $.create('button').class('purple').text('Login')
-                .on('click', () => {popModal(Modal.Login)})
+                .on('click', () => {popModal(new Modal.Login())})
         ] : [
-            $.create('button').class('green').text('Register a node'),
-            $.create('button').class('purple').text('Logout')
-                .on('click', () => {logout()})
+            $.create('button').class('green').text('Register a node')
+                .on('click', () => {popModal(new Modal.RegisterNode())}),
+            $.create('a').attr('href', '/agent-dashboard').add(
+                $.create('button').class('purple').text('Agent Dashboard')
+            )
         ]
     )
 }
 
-function popModal(ModalImpl) {
-    ModalImpl.pop($modal, () => {
+function popModal(modal) {
+    $modal.add(modal.render(() => {
         $modal.noClass('active')
         $notModal.noClass('modal-active')
-    })
+    }))
     $modal.class('active')
     $notModal.class('modal-active')
 }

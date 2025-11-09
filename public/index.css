@@ -51,6 +51,11 @@
     color: #FFFD;
 }
 
+.menu .cta a {
+    text-decoration: none;
+    color: inherit;
+}
+
 .menu .cta button.amber {
     background-color: #ff5722;
 }
@@ -65,134 +70,6 @@
 
 .menu .cta button.purple {
     background-color: #9c27b0;
-}
-
-#modal {
-    position: fixed;
-    top: 0; left: 0;
-    bottom: 0; right: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-#modal:not(.active) {
-    display: none;
-}
-
-.modal {
-    padding: 1rem;
-    border-radius: .25rem;
-    box-shadow: 0 0 .5rem 0 #0008;
-    color: #FFFD;
-    max-height: 75%;
-    overflow-y: auto;
-    animation: modalpop .4s ease;
-}
-
-.modal.green {
-    background-color: #4caf50;
-}
-
-.modal.purple {
-    background-color: #9c27b0;
-}
-
-.modal.amber {
-    background-color: #ff5722;
-}
-
-.modal.blue {
-    background-color: #2196f3;
-}
-
-.modal.blue-gray {
-    background-color: #607d8b;
-}
-
-.modal.green label {
-    background-color: #1b5e20;
-}
-
-.modal.purple label {
-    background-color: #4a148c;
-}
-
-.modal.amber label {
-    background: #bf360c;
-}
-
-.modal.blue label {
-    background: #0d47a1;
-}
-
-.modal.blue-gray label {
-    background: #263238;
-}
-
-.modal.purple input[type='submit'], .modal.purple button {
-    background-color: #4a148c;
-}
-
-.modal.green input[type='submit'], .modal.green button {
-    background-color: #1b5e20;
-}
-
-.modal.amber input[type='submit'], .modal.amber button {
-    background-color: #bf360c;
-}
-
-.modal.blue input[type='submit'], .modal.blue button {
-    background-color: #0d47a1;
-}
-
-.modal.blue-gray input[type='submit'], .modal.blue-gray button {
-    background-color: #263238;
-}
-
-.modal .title {
-    font-size: 1.5rem;
-    font-weight: bold;
-}
-
-.modal .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    margin-bottom: 1rem;
-}
-
-.modal label {
-    padding: .5rem;
-    display: flex;
-    align-items: center;
-    border-radius: .25rem;
-    box-shadow: 0 0 .25rem 0 #0008;
-}
-
-.modal input {
-    appearance: none;
-    border: none;
-    background: none;
-    color: inherit;
-    font-family: inherit;
-    font-size: inherit;
-    flex-grow: 1;
-}
-
-.modal .andor {
-    padding: .5rem;
-}
-
-.modal input[type='submit'], .modal button {
-    padding: .5rem;
-    border-radius: .25rem;
-    box-shadow: 0 0 .25rem 0 #0008;
-}
-
-input[type='submit']:not(:disabled) {
-    cursor: pointer;
 }
 
 #register-input2.bad {

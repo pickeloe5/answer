@@ -40,7 +40,7 @@ class HoursInput {
                         } - ${
                             this.#renderTime(slot.closingTime)
                         }`,
-                        $.create('button').class('blanco center-flex hours-input-unslot')
+                        $.create('button').class('link light center-flex')
                             .text('X')
                             .on('click', () => {
                                 this.#slots = this.#slots.filter(it => it !== slot)
@@ -60,7 +60,7 @@ class HoursInput {
         if (!this.#isOpen) {
             this.$children.in.noClass('active').add(
                 $.create('button')
-                    .class('hours-input-add')
+                    .class('link light')
                     .text('Add hours')
                     .on('click', () => {
                         this.#isOpen = true
@@ -73,7 +73,7 @@ class HoursInput {
         this.$children.in.class('active').add(
             $.div('hours-input-header').add(
                 $.div('hours-input-title').text('Add Hours'),
-                $.create('button').class('center-flex').text('X').on('click', () => {
+                $.create('button').class('link center-flex light').text('X').on('click', () => {
                     this.#isOpen = false
                     this.#renderIn()
                 })
@@ -82,19 +82,23 @@ class HoursInput {
             this.#renderField('Day of week:', this.$children.daySelect),
             this.#renderField('Open time:', this.$children.openTime),
             this.#renderField('Closing time:', this.$children.closingTime),
-            $.create('button').class('hours-input-submit').text('Add hours').on('click', () => {
-                const openTime = this.$children.openTime.value
-                const closingTime = this.$children.closingTime.value
-                const day = DAYS_OF_WEEK.indexOf(this.$children.daySelect.value)
-                if (!openTime || !closingTime)
-                    return;
-                if (this.#slots.some(slot => (
-                    slot.day === day &&
-                    slot.openTime === openTime &&
-                    slot.closingTime === closingTime
-                ))) return;
-                this.#onClickAdd(day, openTime, closingTime)
-            })
+            $.create('button')
+                .class('link light')
+                .text('Add hours')
+                .on('click', () => {
+                    const openTime = this.$children.openTime.value
+                    const closingTime = this.$children.closingTime.value
+                    const day = DAYS_OF_WEEK.indexOf(this.$children.daySelect.value)
+                    if (!openTime || !closingTime)
+                        return;
+                    if (this.#slots.some(slot => (
+                        slot.day === day &&
+                        slot.openTime === openTime &&
+                        slot.closingTime === closingTime
+                    ))) return;
+                    this.#onClickAdd(day, openTime, closingTime)
+                }
+            )
         )
         this.$children.in.node.scrollIntoView({behavior: 'smooth'})
     }
@@ -114,7 +118,7 @@ class HoursInput {
         ]
     }
     #renderDaySelect() {
-        return $.create('select').add(
+        return $.create('select').class('blanco').add(
             DAYS_OF_WEEK.map(day =>
                 $.create('option').attr('value', day).text(day)
             )
