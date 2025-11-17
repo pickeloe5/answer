@@ -10,21 +10,21 @@ export default class RegisterModal extends BaseModal {
     }
     renderContent() {
         let $email, $input, $input2, $registerGoogle
-        $email = $.create('label').add('Email:',
+        $email = $.create('label').class('label').add('Email:',
             $.create('input').attr({
                 type: 'email',
                 autocomplete: 'email',
                 name: 'email'
             })
         )
-        $input = $.create('label').add('Password:',
+        $input = $.create('label').class('label').add('Password:',
             $.create('input').attr({
                 type: 'password',
                 autocomplete: 'new-password',
                 name: 'input'
             })
         )
-        $input2 = $.create('label').add('Confirm password:',
+        $input2 = $.create('label').class('label').add('Confirm password:',
             $.create('input').attr({
                 type: 'password',
                 autocomplete: 'new-password'

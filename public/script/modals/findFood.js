@@ -9,7 +9,7 @@ export default class FindFoodModal extends BaseModal {
         return 'Find Food'
     }
     renderContent() {
-        return $.create('label').add(
+        return $.create('label').class('label').add(
             'Location:',
             $.create('input').attr('type', 'search').class('amber')
         )

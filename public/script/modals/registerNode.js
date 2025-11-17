@@ -16,30 +16,47 @@ export default class RegisterNodeModal extends BaseModal {
     #locationGoogle = null
     #locationValue = null
     #submit() {
+        if (
+            !this.#locationValue ||
+            this.#locationValue.input !== this.$children.location.value
+        ) {
+            alert('Location dropdown selection required.')
+            return
+        }
         const data = {
             name: this.$children.name.value,
-            location: this.#locationValue,
-            role: this.$children.role.value,
+            latitude: this.#locationValue.googleData.geometry.location.lat(),
+            longitude: this.#locationValue.googleData.geometry.location.lng(),
+            address: this.#locationValue.googleData['formatted_address'],
             goods: {
                 shelfStable: this.$children.goods.shelfStable.checked,
                 canned: this.$children.goods.canned.checked
             },
             hours: this.$children.hours.value
         }
-        console.log(data)
+        fetch('/api/nodes', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(data)
+        }).then(async response => {
+            if (response.status !== 200) {
+                console.log('Non-200 response status from add food bank', response.status)
+                return
+            }
+        })
     }
     getColor() {
         return 'green'
     }
     renderTitle() {
-        return 'Register Node'
+        return 'Add Food Bank'
     }
     renderContent() {
-        let $name, $location, $role
+        let $name, $location
         $name = $.create('label').class('label').add('Name:',
             this.$children.name = $.create('input').attr('type', 'text')
         )
-        const $locationInput = $.create('input').attr('type', 'search')
+        const $locationInput = $.create('input').attr({type: 'search', placeholder: ''})
         this.#locationGoogle = new google.maps.places.Autocomplete(
             $locationInput.node,
             {}
@@ -50,30 +67,12 @@ export default class RegisterNodeModal extends BaseModal {
                 googleData: this.#locationGoogle.getPlace()
             }
         })
-        const checkLocation = () => {
-            if (
-                this.#locationValue &&
-                this.$children.location.value !== this.#locationValue.input
-            ) {
-                this.#locationValue = null
-            }
-        }
-        $locationInput.on('change', checkLocation)
-        $locationInput.on('input', checkLocation)
         $location = $.create('label').class('register-node-location label').add('Location:',
             this.$children.location = $locationInput
-        )
-        $role = $.create('label').class('label').add('Role:',
-            this.$children.role = $.create('select').add(
-                $.create('option')
-                    .attr('value', 'distribution')
-                    .text('Distribution')
-            )
         )
         return [
             $name, $.br(), $.br(),
             $location, $.br(), $.br(),
-            $role, $.br(), $.br(),
             this.#renderDistroContent(), $.br(), $.br(),
             $.create('button').text('Submit').on('click', () => {
                 this.#submit()

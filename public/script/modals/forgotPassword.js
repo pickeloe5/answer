@@ -9,7 +9,7 @@ export default class ForgotPasswordModal extends BaseModal {
         return 'Forgot Password'
     }
     renderContent() {
-        return $.create('label').add(
+        return $.create('label').class('label').add(
             'Email:',
             $.create('input').attr({type: 'email', autocomplete: 'email'}),
             $.br(), $.br(), $.create('button').text('Submit')

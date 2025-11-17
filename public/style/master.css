@@ -15,7 +15,8 @@ button,
     input[type='email'],
     input[type='password'],
     input[type='search'],
-    textarea
+    textarea,
+    input[type='submit']
 {
     appearance: none;
     border: none;

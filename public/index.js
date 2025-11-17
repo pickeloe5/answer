@@ -28,7 +28,7 @@ async function loadMenuCta() {
             $.create('button').class('purple').text('Login')
                 .on('click', () => {popModal(new Modal.Login())})
         ] : [
-            $.create('button').class('green').text('Register a node')
+            $.create('button').class('green').text('Add food bank')
                 .on('click', () => {popModal(new Modal.RegisterNode())}),
             $.create('a').attr('href', '/agent-dashboard').add(
                 $.create('button').class('purple').text('Agent Dashboard')

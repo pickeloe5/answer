@@ -9,7 +9,7 @@ export default class GiveFoodModal extends BaseModal {
         return 'Give Food'
     }
     renderContent() {
-        return $.create('label').add(
+        return $.create('label').class('label').add(
             'Location:',
             $.create('input').attr('type', 'search')
         )

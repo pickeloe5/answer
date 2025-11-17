@@ -11,14 +11,14 @@ export default class LoginModal extends BaseModal {
     }
     renderContent() {
         let $email, $input, $loginGoogle
-        $email = $.create('label').add('Email:',
+        $email = $.create('label').class('label').add('Email:',
             $.create('input').attr({
                 type: 'email',
                 autocomplete: 'email',
                 name: 'email'
             })
         )
-        $input = $.create('label').add('Password:',
+        $input = $.create('label').class('label').add('Password:',
             $.create('input').attr({
                 type: 'password',
                 autocomplete: 'current-password',
